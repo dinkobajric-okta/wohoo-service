@@ -1,0 +1,30 @@
+spring:
+  jmx:
+    enabled: true
+  cloud:
+    stream:
+      defaultBinder: kafka
+      bindings:
+        high-priority:
+          destination: my-awesome-topic-p1
+        medium-priority:
+          destination: my-awesome-topic-p2
+        low-priority:
+          destination: my-awesome-topic-p3
+      kafka:
+        binder:
+          replication-factor: 1
+          autoAddPartitions: true
+          minPartitionCount: 4
+          brokers:
+            - localhost:19092
+server:
+  port: 18080
+management:
+  endpoint:
+    metrics:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "metrics"
